@@ -1,0 +1,91 @@
+html, body {
+  background-color: #282c34;
+  text-align: center;
+  height: 100%;
+  overflow: hidden;
+}
+a{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  text-align: center;
+}
+
+.App {
+  text-align: center;
+  height:100%;
+  width:100%;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.App-logo {
+  position:absolute;
+  top:10vmin;
+  height: 20vmin;
+  width: 20vmin;
+  border-radius:50%;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+a {
+  top:50%;
+  font-family: 'Arial';
+  font-size: 14px;
+  letter-spacing: 8px;
+  color: #fff;
+  background-color: red;
+}
+.svg-wrapper {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+	  margin: 0 auto;
+  width: 320px;  
+}
+.shape {
+  stroke-dasharray: 140 540;
+  stroke-dashoffset: -474;
+  stroke-width: 8px;
+  fill: transparent;
+  stroke: #19f6e8;
+  border-bottom: 5px solid black;
+  transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
+}
+
+.svg-wrapper:hover .shape {
+  stroke-width: 2px;
+  stroke-dashoffset: 0;
+  stroke-dasharray: 760;
+}
+
