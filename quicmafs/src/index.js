@@ -41,10 +41,58 @@ class Mybtn extends React.Component {
 </div>
 );
     }else{
+      return <GradeCalculator/>;
+    }
+  }
+}
+
+
+class GradeCalculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: "true"
+    };
+  }
+  changeState = () => {
+    this.setState({show: "false"});
+  }
+  render() {
+    if(this.state.show=="true"){
+    return (
+    <div className="inputField">
+    <input className="inputbar" type="text" id="input1"/>
+    <input className="inputbar" type="text" id="input1"/>
+    <input className="inputbar" type="text" id="input1"/>
+    <input className="inputbar" type="text" id="input1"/>
+    <input className="inputbar" type="text" id="input1"/>   
+</div>
+);
+    }else{
       return null;
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ReactDOM.render(
   <Firstscreen/>,
   document.getElementById('root')

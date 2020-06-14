@@ -10,11 +10,11 @@ var logo=document.getElementsByClassName("App-logo");
 btn.onclick =function(){anime({
 targets: logo,
   width: {
-    value: '-=40px', // 28 - 20 = '8px'
+    value: '-=60px', // 28 - 20 = '8px'
     duration: 1800,
     easing: 'easeInOutSine'
   },height: {
-    value: '-=40px', // 28 - 20 = '8px'
+    value: '-=60px', // 28 - 20 = '8px'
     duration: 1800,
     easing: 'easeInOutSine'
   },
