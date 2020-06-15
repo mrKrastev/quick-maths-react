@@ -6,6 +6,10 @@ var btn=document.getElementById("calculateGrades");
 var logo=document.getElementsByClassName("App-logo");
 
 
+
+var btn=document.getElementById("calculateGrades");
+
+
    
 btn.onclick =function(){anime({
 targets: logo,
@@ -22,6 +26,8 @@ targets: logo,
   duration:4000
 
 });
-}
+
+
+
 
 }

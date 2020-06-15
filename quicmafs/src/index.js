@@ -10,12 +10,33 @@ const Firstscreen = function App() {
       <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />  
       </header>
-      <Mybtn/>
+      <Firstbutton/>
 
 </div>
   );
 }
-class Mybtn extends React.Component {
+
+function makeMeAButton(text,onclick,width,height,top,left) {
+  return (
+    <div className="svg-wrapper" 
+    style={{width:{width},height:{height}}}
+    style={{position:'relative',margin:'25px'}}
+    
+    >
+    <button onClick={onclick}
+        style={{width:{width},height:{height}}}
+        className="text"
+        target="_blank"
+        rel="noopener noreferrer"
+        id="calculateGrades"  
+      >{text}</button>
+<svg height={height} width={width} xmlns="http://www.w3.org/2000/svg">
+  <rect className="shape" height={height} width={width} />    
+</svg>
+</div>
+);
+}
+class Firstbutton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -51,22 +72,33 @@ class GradeCalculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: "true"
+      show: "true",
+      numInputs:1
     };
   }
   changeState = () => {
     this.setState({show: "false"});
   }
+  append = () => {
+    this.setState(prevState => {
+      return {numInputs: prevState.numInputs + 1}
+   });
+  }
   render() {
+    const content = [];
     if(this.state.show=="true"){
+      for (let index = 2; index < this.state.numInputs+1; index++) {
+       content.push(getMeInputs(index));
+        
+      }
+      
     return (
     <div className="inputField">
-    <input className="inputbar" type="text" id="input1"/>
-    <input className="inputbar" type="text" id="input1"/>
-    <input className="inputbar" type="text" id="input1"/>
-    <input className="inputbar" type="text" id="input1"/>
-    <input className="inputbar" type="text" id="input1"/>   
+      {content}
+    {makeMeAButton("Calculate more",this.append,'160','50','100%','100%')}
 </div>
+
+
 );
     }else{
       return null;
@@ -74,7 +106,31 @@ class GradeCalculator extends React.Component {
   }
 }
 
-
+function getMeInputs(index){
+  return(<div>
+      <span className="calculatingUnit">
+    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id="input1"/>
+    <p className="percentages">%</p>
+    </span>
+    <span className="calculatingUnit">
+    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id="input1"/>
+    <p className="percentages">%</p>
+    </span><span className="calculatingUnit">
+    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id="input1"/>
+    <p className="percentages">%</p>
+    </span><span className="calculatingUnit">
+    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id="input1"/>
+    <p className="percentages">%</p>
+    </span><span className="calculatingUnit">
+    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id="input1"/>
+    <p className="percentages">%</p>
+    </span><span className="calculatingUnit">
+    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id="input1"/>
+    <p className="percentages">%</p>
+    </span>
+    </div>
+);
+}
 
 
 
