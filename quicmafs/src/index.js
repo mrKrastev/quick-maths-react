@@ -73,22 +73,41 @@ class GradeCalculator extends React.Component {
     super(props);
     this.state = {
       show: "true",
-      numInputs:1
+      numInputs:1,
+      averageGrade:0
     };
   }
   changeState = () => {
     this.setState({show: "false"});
   }
   append = () => {
+    window.scrollBy({ 
+      top: '500', // could be negative value
+      left: 0, 
+      behavior: 'smooth' 
+    });
     this.setState(prevState => {
       return {numInputs: prevState.numInputs + 1}
    });
   }
+
+  setAverageGrade = () =>{
+    //update the average grade
+    var gradeSum=0;
+    for (let index = 1; index < this.state.numInputs+1; index++) {
+      var id="total"+index;
+      gradeSum +=parseFloat(document.getElementById(id).value);
+     }
+     var total=gradeSum/this.state.numInputs;
+     this.setState({averageGrade:total})
+  
+  }
+  
   render() {
     const content = [];
     if(this.state.show=="true"){
-      for (let index = 2; index < this.state.numInputs+1; index++) {
-       content.push(getMeInputs(index));
+      for (let index = 1; index < this.state.numInputs+1; index++) {
+       content.push(<ExamCalculator count={index}/>);
         
       }
       
@@ -96,6 +115,12 @@ class GradeCalculator extends React.Component {
     <div className="inputField">
       {content}
     {makeMeAButton("Calculate more",this.append,'160','50','100%','100%')}
+    <div><span className="calculatingUnit">
+    <input className="inputbar" style={{borderColor:'#9966ff',borderLeft:'transparent',borderRight:'transparent',pointerEvents:'none'}} type="text" pattern="[0-9]{1,3}" maxLength="3" id="averageTotal" value ={this.state.averageGrade}readOnly/>
+    <p className="percentages">⇑<br/> Average Grade %</p>
+    {makeMeAButton("Update",this.setAverageGrade,'75','50','100%','100%')}
+    </span>
+    </div>
 </div>
 
 
@@ -106,36 +131,78 @@ class GradeCalculator extends React.Component {
   }
 }
 
-function getMeInputs(index){
-  return(<div>
-      <span className="calculatingUnit">
-    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id="input1"/>
-    <p className="percentages">%</p>
+
+class ExamCalculator extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: "true",
+    };
+  }
+  changeState = () => {
+    this.setState({show: "false"});
+  }
+  render() {
+    const content = [];
+    if(this.state.show=="true"){
+    return (
+      <div>
+        <div><span className="calculatingUnit">
+    <input onChange={this.updateTotal} className="inputbar" style={{borderColor:'#33ff99',borderLeft:'transparent',borderRight:'transparent'}} type="text" pattern="[0-9]{1,3}" maxLength="3" id={"examWeight"+this.props.count}/>
+    <p className="percentages">⇑<br/> Exam Weight %</p>
     </span>
     <span className="calculatingUnit">
-    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id="input1"/>
-    <p className="percentages">%</p>
+    <input onChange={this.updateTotal} className="inputbar" style={{borderColor:'#33ff99',borderLeft:'transparent',borderRight:'transparent'}} type="text" pattern="[0-9]{1,3}" maxLength="3" id={"cwWeight"+this.props.count}/>
+    <p className="percentages">⇑<br/> Coursework Weight %</p>
+    </span>
+    <span className="calculatingUnit">
+    <input onChange={this.updateTotal} className="inputbar" style={{borderColor:'#33ff99',borderLeft:'transparent',borderRight:'transparent'}} type="text" pattern="[0-9]{1,3}" maxLength="3" id={"otherWeight"+this.props.count}/>
+    <p className="percentages">⇑<br/> Other Sources Weight %</p>
+    </span></div>
+      <span className="calculatingUnit">
+    <input onChange={this.updateTotal} className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id={"exam"+this.props.count}/>
+    <p className="percentages">⇑<br/> Exam %</p>
+    </span>
+    <span className="calculatingUnit">
+    <input onChange={this.updateTotal} className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id={"cw"+this.props.count}/>
+    <p className="percentages">⇑<br/> Coursework %</p>
     </span><span className="calculatingUnit">
-    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id="input1"/>
-    <p className="percentages">%</p>
+    <input onChange={this.updateTotal} className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id={"other"+this.props.count}/>
+    <p className="percentages">⇑<br/> Other Sources %</p>
     </span><span className="calculatingUnit">
-    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id="input1"/>
-    <p className="percentages">%</p>
-    </span><span className="calculatingUnit">
-    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id="input1"/>
-    <p className="percentages">%</p>
-    </span><span className="calculatingUnit">
-    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id="input1"/>
-    <p className="percentages">%</p>
+    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id={"total"+this.props.count} style={{pointerEvents:'none'}} value={this.state.total} readOnly/>
+    <p className="percentages">⇑<br/> Total %</p>
     </span>
     </div>
 );
+    }else{
+      return null;
+    }
+  }
+  updateTotal = () => {
+    //targeting input
+    var examID="exam"+this.props.count;
+    var examWeightID="examWeight"+this.props.count;
+    var cwWeightID="cwWeight"+this.props.count;
+    var otherWeightID="otherWeight"+this.props.count;
+    var cwID="cw"+this.props.count;
+    var otherID="other"+this.props.count;
+
+    //getting values
+    var examWeightVal=document.getElementById(examWeightID).value;
+    var examVal=document.getElementById(examID).value;
+    var cwVal=document.getElementById(cwID).value;
+    var otherVal=document.getElementById(otherID).value;
+    var cwWeightVal=document.getElementById(cwWeightID).value;
+    var otherWeightVal=document.getElementById(otherWeightID).value;
+  
+  //updating total
+    var totalVal=examVal*0.01*examWeightVal+cwVal*0.01*cwWeightVal+otherVal*0.01*otherWeightVal;
+    this.setState({total: totalVal});
+  
 }
 
-
-
-
-
+}
 
 
 

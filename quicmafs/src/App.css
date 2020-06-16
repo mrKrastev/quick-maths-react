@@ -139,19 +139,22 @@ button {
 }
 
 .percentages{
-width:2%;
  color:white;
- animation-duration: 3s;
+ animation-timing-function: ease-in-out;
+ animation-duration: 2s;
  animation-name: fadein;
+ margin:15px;
  
 }
 @keyframes fadein {
   from {
    color:transparent;
+   margin-top: 30px;
   }
 
   to {
    color:white;
+   margin-top:15px;
   }
 }
 .calculatingUnit{
