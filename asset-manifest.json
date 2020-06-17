@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/quick-maths-react/static/css/main.5baef382.chunk.css",
+    "main.js": "/quick-maths-react/static/js/main.a4ea201d.chunk.js",
+    "main.js.map": "/quick-maths-react/static/js/main.a4ea201d.chunk.js.map",
+    "runtime-main.js": "/quick-maths-react/static/js/runtime-main.db212529.js",
+    "runtime-main.js.map": "/quick-maths-react/static/js/runtime-main.db212529.js.map",
+    "static/js/2.6aa9e9e9.chunk.js": "/quick-maths-react/static/js/2.6aa9e9e9.chunk.js",
+    "static/js/2.6aa9e9e9.chunk.js.map": "/quick-maths-react/static/js/2.6aa9e9e9.chunk.js.map",
+    "index.html": "/quick-maths-react/index.html",
+    "precache-manifest.2176bfe8933a0dbf30132a1710705f74.js": "/quick-maths-react/precache-manifest.2176bfe8933a0dbf30132a1710705f74.js",
+    "service-worker.js": "/quick-maths-react/service-worker.js",
+    "static/css/main.5baef382.chunk.css.map": "/quick-maths-react/static/css/main.5baef382.chunk.css.map",
+    "static/js/2.6aa9e9e9.chunk.js.LICENSE.txt": "/quick-maths-react/static/js/2.6aa9e9e9.chunk.js.LICENSE.txt",
+    "static/media/percentagelogo.png": "/quick-maths-react/static/media/percentagelogo.60ec67d5.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.db212529.js",
+    "static/js/2.6aa9e9e9.chunk.js",
+    "static/css/main.5baef382.chunk.css",
+    "static/js/main.a4ea201d.chunk.js"
+  ]
+}
