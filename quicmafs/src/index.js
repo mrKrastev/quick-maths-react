@@ -96,6 +96,9 @@ class GradeCalculator extends React.Component {
     var gradeSum=0;
     for (let index = 1; index < this.state.numInputs+1; index++) {
       var id="total"+index;
+      if(document.getElementById(id).value==""){
+        document.getElementById(id).value=0;
+      }
       gradeSum +=parseFloat(document.getElementById(id).value);
      }
      var total=gradeSum/this.state.numInputs;
@@ -117,7 +120,7 @@ class GradeCalculator extends React.Component {
     {makeMeAButton("Calculate more",this.append,'160','50','100%','100%')}
     <div><span className="calculatingUnit">
     <input className="inputbar" style={{borderColor:'#9966ff',borderLeft:'transparent',borderRight:'transparent',pointerEvents:'none'}} type="text" pattern="[0-9]{1,3}" maxLength="3" id="averageTotal" value ={this.state.averageGrade}readOnly/>
-    <p className="percentages">⇑<br/> Average Grade %</p>
+    <p className="percentages">⇑<br/> Course Average Grade %</p>
     {makeMeAButton("Update",this.setAverageGrade,'75','50','100%','100%')}
     </span>
     </div>
@@ -170,8 +173,8 @@ class ExamCalculator extends React.Component {
     <input onChange={this.updateTotal} className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id={"other"+this.props.count}/>
     <p className="percentages">⇑<br/> Other Sources %</p>
     </span><span className="calculatingUnit">
-    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id={"total"+this.props.count} style={{pointerEvents:'none'}} value={this.state.total} readOnly/>
-    <p className="percentages">⇑<br/> Total %</p>
+    <input className="inputbar" type="text" pattern="[0-9]{1,3}" maxLength="3" id={"total"+this.props.count} style={{pointerEvents:'none',borderColor:'#ffb366',borderLeft:'transparent',borderRight:'transparent',borderTop:'transparent'}} value={this.state.total} readOnly/>
+    <p className="percentages">⇑<br/> Module Total %</p>
     </span>
     </div>
 );
@@ -195,11 +198,17 @@ class ExamCalculator extends React.Component {
     var otherVal=document.getElementById(otherID).value;
     var cwWeightVal=document.getElementById(cwWeightID).value;
     var otherWeightVal=document.getElementById(otherWeightID).value;
+
+    //autoupdate values:
+    
   
   //updating total
     var totalVal=examVal*0.01*examWeightVal+cwVal*0.01*cwWeightVal+otherVal*0.01*otherWeightVal;
+    if (totalVal>100) {
+      window.alert('Please check if values entered are not exceeding a sum of 100')
+    }else{
     this.setState({total: totalVal});
-  
+    }
 }
 
 }
