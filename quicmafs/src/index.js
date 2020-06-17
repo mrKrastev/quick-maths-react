@@ -4,6 +4,8 @@ import './index.css';
 import './App.css';
 import * as serviceWorker from './serviceWorker';
 import logo from './percentagelogo.png';
+
+//first screen function
 const Firstscreen = function App() {
   return (
     <div className="App">
@@ -15,7 +17,7 @@ const Firstscreen = function App() {
 </div>
   );
 }
-
+//a way to generate myself the same button by passing parameters 
 function makeMeAButton(text,onclick,width,height,top,left) {
   return (
     <div className="svg-wrapper" 
@@ -36,6 +38,7 @@ function makeMeAButton(text,onclick,width,height,top,left) {
 </div>
 );
 }
+// this is the first screen content (technically just a button) but it returns the main content (GradeCalculator)
 class Firstbutton extends React.Component {
   constructor(props) {
     super(props);
@@ -67,21 +70,21 @@ class Firstbutton extends React.Component {
   }
 }
 
-
+//main content class has everything except the generated content (everything that should persist throughout the session is here)
 class GradeCalculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       show: "true",
-      numInputs:1,
-      averageGrade:0
+      numInputs:1, //we need to know how many generated fields there are
+      averageGrade:0 //the running total should stay and update continuously so we keep it as state value
     };
   }
   changeState = () => {
     this.setState({show: "false"});
   }
   append = () => {
-    window.scrollBy({ 
+    window.scrollBy({  //supposed to scroll down the screen on generated component (doesnt work on all browsers)
       top: '500', // could be negative value
       left: 0, 
       behavior: 'smooth' 
@@ -94,14 +97,14 @@ class GradeCalculator extends React.Component {
   setAverageGrade = () =>{
     //update the average grade
     var gradeSum=0;
-    for (let index = 1; index < this.state.numInputs+1; index++) {
+    for (let index = 1; index < this.state.numInputs+1; index++) { //loop through the generated fields and get the "total" values
       var id="total"+index;
       if(document.getElementById(id).value==""){
         document.getElementById(id).value=0;
       }
-      gradeSum +=parseFloat(document.getElementById(id).value);
+      gradeSum +=parseFloat(document.getElementById(id).value); //running total of the values
      }
-     var total=gradeSum/this.state.numInputs;
+     var total=gradeSum/this.state.numInputs; //average of the values
      this.setState({averageGrade:total})
   
   }
@@ -110,13 +113,13 @@ class GradeCalculator extends React.Component {
     const content = [];
     if(this.state.show=="true"){
       for (let index = 1; index < this.state.numInputs+1; index++) {
-       content.push(<ExamCalculator count={index}/>);
+       content.push(<ExamCalculator count={index}/>); //create a content variable with the number of exam calculators displayed
         
       }
       
     return (
     <div className="inputField">
-      {content}
+      {content} 
     {makeMeAButton("Calculate more",this.append,'160','50','100%','100%')}
     <div><span className="calculatingUnit">
     <input className="inputbar" style={{borderColor:'#9966ff',borderLeft:'transparent',borderRight:'transparent',pointerEvents:'none'}} type="text" pattern="[0-9]{1,3}" maxLength="3" id="averageTotal" value ={this.state.averageGrade}readOnly/>
@@ -146,7 +149,7 @@ class ExamCalculator extends React.Component {
     this.setState({show: "false"});
   }
   render() {
-    const content = [];
+    
     if(this.state.show=="true"){
     return (
       <div>
@@ -197,10 +200,7 @@ class ExamCalculator extends React.Component {
     var cwVal=document.getElementById(cwID).value;
     var otherVal=document.getElementById(otherID).value;
     var cwWeightVal=document.getElementById(cwWeightID).value;
-    var otherWeightVal=document.getElementById(otherWeightID).value;
-
-    //autoupdate values:
-    
+    var otherWeightVal=document.getElementById(otherWeightID).value;    
   
   //updating total
     var totalVal=examVal*0.01*examWeightVal+cwVal*0.01*cwWeightVal+otherVal*0.01*otherWeightVal;
@@ -216,14 +216,7 @@ class ExamCalculator extends React.Component {
 
 
 
-
-
-
-
-
-
-
-
+//render the whole thing
 
 ReactDOM.render(
   <Firstscreen/>,
@@ -231,7 +224,4 @@ ReactDOM.render(
 );
 
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

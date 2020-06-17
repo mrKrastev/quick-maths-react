@@ -95,7 +95,7 @@ button {
 .inputbar{
   color:white;
   text-align:center;
-  width:18%;
+  width:20%;
   font-size: 24px;
   margin:5px;
   background-color: transparent;
@@ -110,7 +110,7 @@ button {
   }
 
   to {
-    width:18%;
+    width:20%;
   }
 }
 
